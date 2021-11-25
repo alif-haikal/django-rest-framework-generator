@@ -1,0 +1,11 @@
+config.py
+*.log
+*.pot
+*.pyc
+*.txt
+# remove migration py codetable
+*_table.py 
+__pycache__/
+local_settings.py
+db.sqlite3
+media

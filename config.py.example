@@ -1,0 +1,28 @@
+#-*- coding: utf8 -*-
+import psycopg2 as pdb
+import sys
+
+config_dict = { 
+      "database" : "your_database" , 
+      "user": "your_user" , 
+      "password": "your_password" , 
+      "host": "your_host" , 
+      "port": "your_port"  , 
+      "schema" : "your_schema",
+      "application_name" : "your_application_name"
+      }
+
+try:
+    
+    con = pdb.connect(database=config_dict['database'], user=config_dict['user'],
+                      password=config_dict['password'], host=config_dict['host'], port=config_dict['port'] ,options="-c search_path="+config_dict['schema'])
+    cur = con.cursor()
+    cur.execute('SELECT version()')
+    ver = cur.fetchone()
+    # print(ver) 
+
+except pdb.DatabaseError as e:
+    print("Error %d: %s" % (e.args[0], e.args[1]))
+    sys.exit(1)
+
+
